@@ -5,6 +5,7 @@ import CommentArea from "./CommentArea";
 class SingleBook extends Component {
   state = {
     selected: false,
+    prevTarget: null,
   };
   sendData2 = (value) => {
     this.props.parentCallback2(value);
@@ -17,14 +18,15 @@ class SingleBook extends Component {
         style={{
           border: this.state.selected ? "2px solid green" : "1px solid grey",
         }}
+        onClick={(e) => {
+          this.setState({ selected: !this.state.selected });
+          this.sendData2(this.props.book.asin);
+          this.setState({ prevTarget: e.target }); // trying to fix the onClick, no luck for now
+        }}
       >
         <Card.Img
           variant="top"
           src={this.props.book.img}
-          onClick={(e) => {
-            this.setState({ selected: !this.state.selected });
-            this.sendData2(this.props.book.asin);
-          }}
           value={this.props.book.asin}
         />
         <Card.Body>

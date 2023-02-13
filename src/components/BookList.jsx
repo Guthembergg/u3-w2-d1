@@ -6,6 +6,7 @@ class BookList extends Component {
   state = {
     searchQuery: "",
     bookSelected: "",
+    selected: false,
   };
   sendData = (value) => {
     this.props.parentCallback(value);
