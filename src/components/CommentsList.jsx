@@ -18,15 +18,6 @@ class CommentList extends Component {
             </Col>
           </Row>
         )}
-        {this.props.comments.map((el, i) => {
-          return (
-            <SingleComment
-              comment={el.comment}
-              rate={el.rate}
-              key={`comment-${i}`}
-            />
-          );
-        })}
       </>
     );
   }

@@ -1,24 +1,43 @@
-import 'bootstrap/dist/css/bootstrap.min.css'
-import './App.css'
-import MyNav from './components/MyNav'
-import MyFooter from './components/MyFooter'
-import MyJumbotron from './components/MyJumbotron'
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
+import MyNav from "./components/MyNav";
+import MyFooter from "./components/MyFooter";
+import MyJumbotron from "./components/MyJumbotron";
 // import AllTheBooks from './components/AllTheBooks'
-import { Container } from 'react-bootstrap'
-import BookList from './components/BookList'
+import { Container, Row, Col } from "react-bootstrap";
+import BookList from "./components/BookList";
+import CommentArea from "./components/CommentsList";
 
-import fantasy from './data/fantasy.json'
+import fantasy from "./data/fantasy.json";
+import { Component } from "react";
 
-function App() {
-  return (
-    <Container>
-      <MyNav />
-      <MyJumbotron />
-      {/* <AllTheBooks /> */}
-      <BookList books={fantasy} />
-      <MyFooter />
-    </Container>
-  )
+class App extends Component {
+  state = {
+    selected: null,
+    selectedBook: "",
+  };
+  callbackFunction = (childData) => {
+    this.setState({ selectedBook: childData });
+  };
+
+  render() {
+    return (
+      <Container>
+        <MyNav />
+        <MyJumbotron />
+        {/* <AllTheBooks /> */}
+        <Row>
+          <Col xs={7}>
+            <BookList books={fantasy} parentCallback={this.callbackFunction} />
+          </Col>
+          <Col>
+            <CommentArea asin={this.state.selectedBook} />
+          </Col>
+        </Row>
+        <MyFooter />
+      </Container>
+    );
+  }
 }
 
-export default App
+export default App;

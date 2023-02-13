@@ -5,6 +5,13 @@ import { Col, Form, Row } from "react-bootstrap";
 class BookList extends Component {
   state = {
     searchQuery: "",
+    bookSelected: "",
+  };
+  sendData = (value) => {
+    this.props.parentCallback(value);
+  };
+  callbackFunction = (childData) => {
+    this.setState({ bookSelected: childData });
   };
 
   render() {
@@ -30,7 +37,7 @@ class BookList extends Component {
             )
             .map((b) => (
               <Col xs={12} md={4} key={b.asin}>
-                <SingleBook book={b} />
+                <SingleBook book={b} parentCallback={this.callbackFunction} />
               </Col>
             ))}
         </Row>

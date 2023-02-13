@@ -6,6 +6,9 @@ class SingleBook extends Component {
   state = {
     selected: false,
   };
+  sendData = (value) => {
+    this.props.parentCallback(value);
+  };
 
   render() {
     return (
@@ -18,13 +21,16 @@ class SingleBook extends Component {
         <Card.Img
           variant="top"
           src={this.props.book.img}
-          onClick={() => this.setState({ selected: !this.state.selected })}
+          onClick={(e) => {
+            this.setState({ selected: !this.state.selected });
+            this.sendData(this.props.book.asin);
+          }}
+          value={this.props.book.asin}
         />
         <Card.Body>
           <Card.Title style={{ color: "black" }}>
             {this.props.book.title}
           </Card.Title>
-          {this.state.selected && <CommentArea book={this.props.book} />}
         </Card.Body>
       </Card>
     );
