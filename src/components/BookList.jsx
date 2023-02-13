@@ -14,6 +14,12 @@ class BookList extends Component {
     this.setState({ bookSelected: childData });
   };
 
+  componentDidUpdate = (prevProps, prevState) => {
+    if (prevState.bookSelected !== this.state.bookSelected) {
+      this.sendData(this.state.bookSelected);
+    }
+  };
+
   render() {
     return (
       <>
@@ -37,7 +43,7 @@ class BookList extends Component {
             )
             .map((b) => (
               <Col xs={12} md={4} key={b.asin}>
-                <SingleBook book={b} parentCallback={this.callbackFunction} />
+                <SingleBook book={b} parentCallback2={this.callbackFunction} />
               </Col>
             ))}
         </Row>

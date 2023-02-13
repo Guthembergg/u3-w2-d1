@@ -6,8 +6,8 @@ class SingleBook extends Component {
   state = {
     selected: false,
   };
-  sendData = (value) => {
-    this.props.parentCallback(value);
+  sendData2 = (value) => {
+    this.props.parentCallback2(value);
   };
 
   render() {
@@ -23,7 +23,7 @@ class SingleBook extends Component {
           src={this.props.book.img}
           onClick={(e) => {
             this.setState({ selected: !this.state.selected });
-            this.sendData(this.props.book.asin);
+            this.sendData2(this.props.book.asin);
           }}
           value={this.props.book.asin}
         />

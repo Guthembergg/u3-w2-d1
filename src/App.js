@@ -6,7 +6,7 @@ import MyJumbotron from "./components/MyJumbotron";
 // import AllTheBooks from './components/AllTheBooks'
 import { Container, Row, Col } from "react-bootstrap";
 import BookList from "./components/BookList";
-import CommentArea from "./components/CommentsList";
+import CommentArea from "./components/CommentArea";
 
 import fantasy from "./data/fantasy.json";
 import { Component } from "react";
@@ -14,7 +14,7 @@ import { Component } from "react";
 class App extends Component {
   state = {
     selected: null,
-    selectedBook: "",
+    selectedBook: null,
   };
   callbackFunction = (childData) => {
     this.setState({ selectedBook: childData });
@@ -31,7 +31,9 @@ class App extends Component {
             <BookList books={fantasy} parentCallback={this.callbackFunction} />
           </Col>
           <Col>
-            <CommentArea asin={this.state.selectedBook} />
+            {this.state.selectedBook && (
+              <CommentArea asin={this.state.selectedBook} />
+            )}
           </Col>
         </Row>
         <MyFooter />
